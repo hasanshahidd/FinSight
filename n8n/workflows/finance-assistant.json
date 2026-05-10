@@ -1,0 +1,91 @@
+{
+  "id": "finsight-chat-v2",
+  "name": "FinSight — Chat Orchestration",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "finance-chat",
+        "responseMode": "lastNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" },
+              { "name": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+              { "name": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, X-User-Id" }
+            ]
+          }
+        }
+      },
+      "id": "1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "finsight-finance-chat"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate inbound payload. Throws → n8n returns 500 (rejected).\nconst body = $input.item.json.body || $input.item.json;\nconst message = (body.message || '').toString().trim();\nconst session_id = (body.session_id || 'default').toString().slice(0, 64);\nconst user_id = (body.user_id || $input.item.json.headers?.['x-user-id'] || 'user_1').toString().slice(0, 64);\n\nif (!message) throw new Error('VALIDATE: message is required');\nif (message.length > 2000) throw new Error('VALIDATE: message too long (max 2000 chars)');\nif (!/^user_[0-9]+$/.test(user_id)) throw new Error('VALIDATE: invalid user_id format');\n\nreturn { json: { message, session_id, user_id, received_at: new Date().toISOString() } };"
+      },
+      "id": "2",
+      "name": "Validate Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Token-bucket rate limiter: 30 messages per user per minute.\n// Uses n8n's persistent static data store.\nconst userId = $input.item.json.user_id;\nconst now = Date.now();\nconst windowMs = 60_000;\nconst limit = 30;\n\nconst data = $getWorkflowStaticData('global');\ndata.buckets = data.buckets || {};\nconst bucket = data.buckets[userId] || { count: 0, reset_at: now + windowMs };\nif (now > bucket.reset_at) { bucket.count = 0; bucket.reset_at = now + windowMs; }\nbucket.count += 1;\ndata.buckets[userId] = bucket;\n\nif (bucket.count > limit) {\n  const retryAfter = Math.ceil((bucket.reset_at - now) / 1000);\n  throw new Error(`RATE_LIMIT: ${limit}/min exceeded for ${userId} (retry in ${retryAfter}s)`);\n}\nreturn $input.item;"
+      },
+      "id": "3",
+      "name": "Rate Limit",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [640, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/api/chat",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "X-Request-Id", "value": "={{ $execution.id }}" },
+            { "name": "X-User-Id", "value": "={{ $json.user_id }}" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ message: $json.message, session_id: $json.session_id, user_id: $json.user_id }) }}",
+        "options": { "timeout": 60000 }
+      },
+      "id": "4",
+      "name": "Call Backend Agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [860, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Audit log: structured record of every chat. n8n persists this in\n// execution_data — reviewable via UI / API / SQLite directly.\nconst input = $('Validate Input').item.json;\nconst out = $input.item.json;\nconst event = {\n  ts: new Date().toISOString(),\n  execution_id: $execution.id,\n  user_id: input.user_id,\n  session_id: input.session_id,\n  query: (input.message || '').slice(0, 200),\n  route: out && out.structured_data && out.structured_data.route,\n  rationale: (out && out.structured_data && out.structured_data.rationale || '').slice(0, 200),\n  tools_called: ((out && out.tool_calls) || []).map(t => t.name),\n  citations_count: ((out && out.citations) || []).length,\n  response_chars: (out && out.message || '').length,\n};\nconsole.log('FINSIGHT_AUDIT', JSON.stringify(event));\n// Pass the agent response through unchanged — this is the workflow's final output.\nreturn $input.item;"
+      },
+      "id": "5",
+      "name": "Audit Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1080, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{ "node": "Validate Input", "type": "main", "index": 0 }]] },
+    "Validate Input": { "main": [[{ "node": "Rate Limit", "type": "main", "index": 0 }]] },
+    "Rate Limit": { "main": [[{ "node": "Call Backend Agent", "type": "main", "index": 0 }]] },
+    "Call Backend Agent": { "main": [[{ "node": "Audit Log", "type": "main", "index": 0 }]] }
+  },
+  "active": true,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "4",
+  "tags": [{ "name": "finsight" }]
+}

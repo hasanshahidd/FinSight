@@ -1,0 +1,49 @@
+# Env / secrets
+.env
+.env.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Node
+node_modules/
+dist/
+.vite/
+*.log
+npm-debug.log*
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Project artifacts
+backend/data/finsight.db
+backend/chroma_db/
+backend/chroma_db_test/
+backend/data/finsight_test.db
+backend/data/checkpoints.sqlite
+chroma_db/
+chroma_db_test/
+*.sqlite
+*.sqlite3
+
+# Test/dev artifacts
+*.png
+
+# Build
+build/
+out/
+
+# n8n local
+n8n_data/

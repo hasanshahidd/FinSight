@@ -1,0 +1,118 @@
+# Full-stack: backend + frontend + n8n + redis (+ optional langfuse).
+# One command: `docker compose up -d` brings everything up.
+#
+# Prereq: a `.env` file at the project root with OPENAI_API_KEY=sk-...
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: finsight-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_PROVIDER=openai
+      - LLM_MODEL=${LLM_MODEL:-gpt-4o-mini}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMBEDDING_PROVIDER=openai
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-text-embedding-3-small}
+      - DATABASE_URL=sqlite+aiosqlite:///./data/finsight.db
+      - CHROMA_PERSIST_DIR=/app/chroma_db
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET=${JWT_SECRET:-finsight-demo-jwt-secret}
+      - JWT_EXPIRE_MINUTES=1440
+      - LOG_LEVEL=INFO
+      - LOG_FORMAT=json
+    volumes:
+      - backend_data:/app/data
+      - backend_chroma:/app/chroma_db
+    depends_on:
+      - redis
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_URL=http://localhost:8000
+        - VITE_N8N_WEBHOOK_URL=http://localhost:5678/webhook/finance-chat
+    container_name: finsight-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+      - n8n
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: finsight-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=UTC
+      - N8N_SECURE_COOKIE=false
+      - N8N_RUNNERS_ENABLED=true
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/workflows:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  redis:
+    image: redis:7-alpine
+    container_name: finsight-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
+  # --- Optional: Langfuse self-hosted (enable with --profile observability) ---
+  langfuse-db:
+    image: postgres:16-alpine
+    container_name: finsight-langfuse-db
+    restart: unless-stopped
+    profiles: ["observability"]
+    environment:
+      - POSTGRES_USER=langfuse
+      - POSTGRES_PASSWORD=langfuse
+      - POSTGRES_DB=langfuse
+    volumes:
+      - langfuse_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langfuse -d langfuse"]
+      interval: 10s
+      retries: 5
+
+  langfuse:
+    image: langfuse/langfuse:2
+    container_name: finsight-langfuse
+    restart: unless-stopped
+    profiles: ["observability"]
+    depends_on:
+      langfuse-db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://langfuse:langfuse@langfuse-db:5432/langfuse
+      - NEXTAUTH_SECRET=finsight-langfuse-dev-secret-change-me
+      - SALT=finsight-langfuse-salt
+      - NEXTAUTH_URL=http://localhost:3000
+      - TELEMETRY_ENABLED=false
+
+volumes:
+  backend_data:
+  backend_chroma:
+  n8n_data:
+  redis_data:
+  langfuse_db_data:
