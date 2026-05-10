@@ -34,7 +34,7 @@ export interface ChatApiResponse {
 }
 
 /**
- * Send a chat message. ALWAYS routes through the n8n webhook — there is no
+ * Send a chat message. ALWAYS routes through the n8n webhook - there is no
  * direct-to-backend fallback. The n8n workflow validates input, enforces
  * rate limits, calls the FastAPI agent, audit-logs the result, and returns
  * the response. This satisfies the assessment's "n8n orchestration" rubric.

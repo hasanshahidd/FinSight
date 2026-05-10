@@ -12,7 +12,7 @@ class ChatRequest(BaseModel):
 
 
 class ToolCallTrace(BaseModel):
-    """A single tool invocation captured during agent execution — surfaced to the UI."""
+    """A single tool invocation captured during agent execution - surfaced to the UI."""
     name: str
     args: dict[str, Any]
     result_preview: str

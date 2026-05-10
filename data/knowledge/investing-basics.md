@@ -4,9 +4,9 @@ Investing is putting money into assets that produce returns over time. The goal 
 
 ## The three things that matter most
 
-1. **Time in the market** — long horizons let compounding work and smooth out volatility. The S&P 500 has had ~20-year periods with no negative returns.
-2. **Costs** — every 1% of fees is roughly 25% less wealth at 30 years. Prefer index funds (0.03–0.10% expense ratios) over actively managed funds (0.5–1.5%).
-3. **Behavior** — selling during crashes locks in losses. The single largest predictor of investor returns is whether they kept investing through downturns.
+1. **Time in the market** - long horizons let compounding work and smooth out volatility. The S&P 500 has had ~20-year periods with no negative returns.
+2. **Costs** - every 1% of fees is roughly 25% less wealth at 30 years. Prefer index funds (0.03–0.10% expense ratios) over actively managed funds (0.5–1.5%).
+3. **Behavior** - selling during crashes locks in losses. The single largest predictor of investor returns is whether they kept investing through downturns.
 
 Stock-picking, market-timing, and trying to "beat the market" are far less important than these three.
 
@@ -18,15 +18,15 @@ A globally-diversified, low-cost, three-fund portfolio is sufficient for most pe
 - ~30% Total international stock index (e.g., VXUS, VTIAX)
 - ~10% Total bond market index (e.g., BND), increasing with age
 
-A **single-fund alternative** is a target-date retirement fund (e.g., 2055 fund) — auto-rebalances and shifts to bonds as you near retirement.
+A **single-fund alternative** is a target-date retirement fund (e.g., 2055 fund) - auto-rebalances and shifts to bonds as you near retirement.
 
 ## Account priority
 
-1. **401(k) up to employer match** — free money, ~50–100% instant return.
-2. **HSA** if you have a high-deductible health plan — triple tax advantage.
-3. **Roth IRA** — $7,000/yr limit, tax-free growth, withdraw contributions anytime.
-4. **Max 401(k)** — $23,000/yr limit (2024).
-5. **Taxable brokerage** — for goals before retirement, no contribution limit.
+1. **401(k) up to employer match** - free money, ~50–100% instant return.
+2. **HSA** if you have a high-deductible health plan - triple tax advantage.
+3. **Roth IRA** - $7,000/yr limit, tax-free growth, withdraw contributions anytime.
+4. **Max 401(k)** - $23,000/yr limit (2024).
+5. **Taxable brokerage** - for goals before retirement, no contribution limit.
 
 ## Avoid these traps
 

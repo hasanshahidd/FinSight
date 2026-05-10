@@ -1,4 +1,4 @@
-"""AnomalyDetective — ReAct subgraph."""
+"""AnomalyDetective - ReAct subgraph."""
 
 from langchain_core.language_models import BaseChatModel
 

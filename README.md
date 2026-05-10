@@ -1,4 +1,4 @@
-# FinSight AI — Personal Finance Assistant
+# FinSight AI - Personal Finance Assistant
 
 > Conversational AI assistant for personal finance. Multi-agent LangGraph supervisor + 4 specialists, hybrid RAG (dense + BM25), n8n as the only chat path (validate → rate-limit → backend → audit), and a clean React UI. Built for the AI Engineer assessment.
 
@@ -9,7 +9,7 @@
 echo "OPENAI_API_KEY=sk-..." > .env
 # 2. Bring up the entire stack (backend + frontend + n8n + redis)
 docker compose up -d
-# 3. Open http://localhost:5173 — the React app is wired through n8n by default
+# 3. Open http://localhost:5173 - the React app is wired through n8n by default
 ```
 
 After ~2 minutes (build + seed + ingest), open:
@@ -20,7 +20,7 @@ After ~2 minutes (build + seed + ingest), open:
 
 ## 🗄️ How the databases are created on first run
 
-Both **SQLite** (mock bank) and **ChromaDB** (knowledge index) are created **automatically** the first time the backend starts — no manual seeding step. The Docker entrypoint runs three commands in sequence:
+Both **SQLite** (mock bank) and **ChromaDB** (knowledge index) are created **automatically** the first time the backend starts - no manual seeding step. The Docker entrypoint runs three commands in sequence:
 
 ```dockerfile
 # backend/Dockerfile
@@ -33,13 +33,13 @@ CMD python scripts/generate_demo_data.py \
 |------|-----------------|----------------|
 | 1. `generate_demo_data.py` | Calls `init_db()` to create the SQLAlchemy tables, then `seed_all()` to insert **5 personas × 240 days × ~2,400 deterministic transactions** with 8 baked-in stories | `backend/data/finsight.db` (SQLite) |
 | 2. `ingest_docs.py` | Reads 21 markdown docs from `data/knowledge/`, embeds them via OpenAI, and persists both the dense Chroma collection and the BM25 corpus | `backend/chroma_db/` (vector store) |
-| 3. `uvicorn` | FastAPI starts; the `lifespan` hook re-runs `init_db()` (idempotent — only creates tables if missing) | API on port 8000 |
+| 3. `uvicorn` | FastAPI starts; the `lifespan` hook re-runs `init_db()` (idempotent - only creates tables if missing) | API on port 8000 |
 
-**Both seed steps are idempotent.** `seed_persona()` deletes existing rows for each user before inserting, and `get_chroma_collection(reset=True)` drops the collection before re-ingesting. So whether it's the first run or the hundredth, the resulting state is identical — reproducibility on every `docker compose up`.
+**Both seed steps are idempotent.** `seed_persona()` deletes existing rows for each user before inserting, and `get_chroma_collection(reset=True)` drops the collection before re-ingesting. So whether it's the first run or the hundredth, the resulting state is identical - reproducibility on every `docker compose up`.
 
 The Docker volumes (`backend_data`, `backend_chroma`) persist between restarts, so subsequent boots are fast (~5 s) but still get a clean re-seed if you want.
 
-### Local (no Docker) — run the seeds once manually
+### Local (no Docker) - run the seeds once manually
 
 If you skip Docker and run uvicorn directly, seed the database + index once before starting the server:
 
@@ -54,22 +54,22 @@ python scripts/ingest_docs.py           # creates chroma_db/ + 21 docs
 uvicorn app.main:app --reload --port 8000
 ```
 
-The FastAPI startup hook still calls `init_db()` automatically, so the **table schema** auto-creates on first uvicorn boot — but without step 1 the database is empty and chat queries against user data return nothing. Both `finsight.db` and `chroma_db/` are listed in `.gitignore` because they're rebuilt from the seed scripts, not committed.
+The FastAPI startup hook still calls `init_db()` automatically, so the **table schema** auto-creates on first uvicorn boot - but without step 1 the database is empty and chat queries against user data return nothing. Both `finsight.db` and `chroma_db/` are listed in `.gitignore` because they're rebuilt from the seed scripts, not committed.
 
 ## ☁️ Free-tier deployment
 
-A complete guide to hosting the full stack for $0 — Oracle Cloud (forever-free VPS), Render, Fly.io, Hugging Face Spaces, or Cloud Run for the backend; Vercel / Cloudflare Pages / Netlify for the frontend; Upstash for managed Redis.
+A complete guide to hosting the full stack for $0 - Oracle Cloud (forever-free VPS), Render, Fly.io, Hugging Face Spaces, or Cloud Run for the backend; Vercel / Cloudflare Pages / Netlify for the frontend; Upstash for managed Redis.
 
 → **[docs/deploy.md](docs/deploy.md)** has step-by-step recipes and a "best free combo" recommendation.
 
 ## 📊 Eval scoreboard (30 golden queries, automated)
 
 ```
-routing_accuracy        0.900   27/30 — agent picked right specialist
-tool_coverage           0.933   28/30 — expected tool fired
-factual_heuristic       1.000   30/30 — required facts in response
-safety_heuristic        1.000   30/30 — no forbidden phrases
-judge_safety            1.000   30/30 — LLM-judge: never gave unsafe advice
+routing_accuracy        0.900   27/30 - agent picked right specialist
+tool_coverage           0.933   28/30 - expected tool fired
+factual_heuristic       1.000   30/30 - required facts in response
+safety_heuristic        1.000   30/30 - no forbidden phrases
+judge_safety            1.000   30/30 - LLM-judge: never gave unsafe advice
 judge_factual_grounding 0.600   LLM-judge (strict)
 judge_helpfulness       0.593   LLM-judge (strict)
 ```
@@ -80,12 +80,12 @@ Reproduce: `cd backend && pytest tests/eval -v` (full 30 cases with `EVAL_FULL=1
 
 - **Chat naturally** about your money: *"How much on food last week?"*, *"Is anything weird?"*, *"Suggest a budget based on my spending"*
 - **Multi-turn memory** with summary-buffer compaction at >40 messages
-- **No hardcoded routing** — a supervisor LLM picks one of four specialists (`TransactionAnalyst`, `KnowledgeAdvisor`, `BudgetCoach`, `AnomalyDetective`) using structured output
+- **No hardcoded routing** - a supervisor LLM picks one of four specialists (`TransactionAnalyst`, `KnowledgeAdvisor`, `BudgetCoach`, `AnomalyDetective`) using structured output
 - **13 tools** the agent can call: transaction queries, semantic search, recurring detection, anomaly z-scores, forecasting, period comparison, category drift, hybrid knowledge retrieval, and budget evaluation
 - **Hybrid RAG**: dense embeddings + BM25 + reciprocal rank fusion + optional cross-encoder reranker over 21 financial-literacy docs
 - **5 personas** × 240 days × ~2,400 deterministic transactions × **8 baked-in stories** (subscription creep, surprise medical bill, vacation cluster, raise, annual insurance, dining drift, overdraft, tax refund)
-- **Live tool-call streaming** via WebSocket — see the agent decide and execute in real time
-- **n8n on the request path** — webhook → validate → auth → rate-limit → backend → audit → respond
+- **Live tool-call streaming** via WebSocket - see the agent decide and execute in real time
+- **n8n on the request path** - webhook → validate → auth → rate-limit → backend → audit → respond
 - **Eval harness** with 30 golden queries scored on 5 axes (LLM-as-judge + deterministic checks)
 - **Self-hosted Langfuse** capturing per-request nested spans with token counts
 
@@ -99,7 +99,7 @@ Reproduce: `cd backend && pytest tests/eval -v` (full 30 cases with `EVAL_FULL=1
                    │                          (or REST through n8n)
                    ▼
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  n8n  (port 5678) — orchestration layer                                  │
+│  n8n  (port 5678) - orchestration layer                                  │
 │  Webhook → Validate → Auth → Rate Limit → HTTP → Audit → Respond         │
 └──────────────────┬───────────────────────────────────────────────────────┘
                    ▼
@@ -201,7 +201,7 @@ npm run dev
 ```powershell
 cd backend
 pytest tests/eval -v
-# Results saved to data/eval_results.json — surfaced in the UI's right panel
+# Results saved to data/eval_results.json - surfaced in the UI's right panel
 ```
 
 ## Example queries
@@ -268,7 +268,7 @@ finance bot/
 │       │                     CitationPill, EvalScoreboard, PersonaSwitcher, ...
 │       ├── hooks/            useChat (auto-routes), useChatStream, useChatRest, usePersona
 │       └── lib/              api.ts, types.ts, utils.ts
-├── n8n/workflows/            finance-assistant.json (v2 — auth + rate-limit + audit)
+├── n8n/workflows/            finance-assistant.json (v2 - auth + rate-limit + audit)
 ├── data/
 │   ├── transactions/         (generated to backend/data/finsight.db)
 │   └── knowledge/            21 markdown docs (the RAG corpus)
@@ -291,11 +291,11 @@ finance bot/
 
 ## Deliverables
 
-- [x] **Source code** — this repository
-- [x] **README** — this file
-- [x] **Demo video** — see [docs/demo-script.md](docs/demo-script.md) for the recording walkthrough
-- [x] **n8n workflow JSON** — [n8n/workflows/finance-assistant.json](n8n/workflows/finance-assistant.json)
-- [x] **Sample data** — generated via `scripts/generate_demo_data.py`; knowledge corpus in [data/knowledge/](data/knowledge/)
+- [x] **Source code** - this repository
+- [x] **README** - this file
+- [x] **Demo video** - see [docs/demo-script.md](docs/demo-script.md) for the recording walkthrough
+- [x] **n8n workflow JSON** - [n8n/workflows/finance-assistant.json](n8n/workflows/finance-assistant.json)
+- [x] **Sample data** - generated via `scripts/generate_demo_data.py`; knowledge corpus in [data/knowledge/](data/knowledge/)
 
 ## Bonus capabilities included
 
@@ -310,8 +310,8 @@ finance bot/
 
 ## Limitations & assumptions
 
-- Single-process memory (MemorySaver) — chat history resets on backend restart.
+- Single-process memory (MemorySaver) - chat history resets on backend restart.
 - Cross-encoder reranker requires `sentence-transformers` install (~80MB + torch); commented out by default in `requirements.txt` for fast install. RAG falls back to RRF-only without it (still strong).
 - ChromaDB is embedded; not concurrent across processes.
-- Mock JWT — auth is for shape demonstration, not security.
+- Mock JWT - auth is for shape demonstration, not security.
 - All seed data is deterministic from per-persona RNG seeds; the same numbers reproduce on every regen.

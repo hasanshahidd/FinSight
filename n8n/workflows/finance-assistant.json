@@ -1,6 +1,6 @@
 {
   "id": "finsight-chat-v2",
-  "name": "FinSight — Chat Orchestration",
+  "name": "FinSight - Chat Orchestration",
   "nodes": [
     {
       "parameters": {
@@ -69,7 +69,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Audit log: structured record of every chat. n8n persists this in\n// execution_data — reviewable via UI / API / SQLite directly.\nconst input = $('Validate Input').item.json;\nconst out = $input.item.json;\nconst event = {\n  ts: new Date().toISOString(),\n  execution_id: $execution.id,\n  user_id: input.user_id,\n  session_id: input.session_id,\n  query: (input.message || '').slice(0, 200),\n  route: out && out.structured_data && out.structured_data.route,\n  rationale: (out && out.structured_data && out.structured_data.rationale || '').slice(0, 200),\n  tools_called: ((out && out.tool_calls) || []).map(t => t.name),\n  citations_count: ((out && out.citations) || []).length,\n  response_chars: (out && out.message || '').length,\n};\nconsole.log('FINSIGHT_AUDIT', JSON.stringify(event));\n// Pass the agent response through unchanged — this is the workflow's final output.\nreturn $input.item;"
+        "jsCode": "// Audit log: structured record of every chat. n8n persists this in\n// execution_data - reviewable via UI / API / SQLite directly.\nconst input = $('Validate Input').item.json;\nconst out = $input.item.json;\nconst event = {\n  ts: new Date().toISOString(),\n  execution_id: $execution.id,\n  user_id: input.user_id,\n  session_id: input.session_id,\n  query: (input.message || '').slice(0, 200),\n  route: out && out.structured_data && out.structured_data.route,\n  rationale: (out && out.structured_data && out.structured_data.rationale || '').slice(0, 200),\n  tools_called: ((out && out.tool_calls) || []).map(t => t.name),\n  citations_count: ((out && out.citations) || []).length,\n  response_chars: (out && out.message || '').length,\n};\nconsole.log('FINSIGHT_AUDIT', JSON.stringify(event));\n// Pass the agent response through unchanged - this is the workflow's final output.\nreturn $input.item;"
       },
       "id": "5",
       "name": "Audit Log",

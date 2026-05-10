@@ -36,7 +36,7 @@ async def route(messages: list, user_id: str = "user_1", persona_desc: str = "")
         None,
     )
     if last_user is None:
-        return RouteDecision(specialist="transaction_analyst", rationale="default — no human message")
+        return RouteDecision(specialist="transaction_analyst", rationale="default - no human message")
 
     prompt = load_prompt("supervisor", user_id=user_id, persona_desc=persona_desc)
     decision = await _supervisor_llm().ainvoke([

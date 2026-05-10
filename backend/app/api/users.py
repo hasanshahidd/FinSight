@@ -1,4 +1,4 @@
-"""User + account endpoints — drives the persona switcher."""
+"""User + account endpoints - drives the persona switcher."""
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select

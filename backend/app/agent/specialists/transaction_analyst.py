@@ -1,4 +1,4 @@
-"""TransactionAnalyst — ReAct subgraph."""
+"""TransactionAnalyst - ReAct subgraph."""
 
 from langchain_core.language_models import BaseChatModel
 

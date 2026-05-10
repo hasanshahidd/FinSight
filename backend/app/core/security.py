@@ -1,4 +1,4 @@
-"""Mock JWT auth — for demo only. Do not use in production."""
+"""Mock JWT auth - for demo only. Do not use in production."""
 
 from datetime import datetime, timedelta, timezone
 

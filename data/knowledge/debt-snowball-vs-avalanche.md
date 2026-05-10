@@ -4,7 +4,7 @@ If you carry multiple debts, two well-known strategies compete for "fastest payo
 
 ## The Avalanche method
 
-Pay minimums on all debts. Direct every extra dollar to the debt with the **highest interest rate**. When that's gone, roll its payment into the next-highest-rate debt. Mathematically optimal — minimizes total interest paid.
+Pay minimums on all debts. Direct every extra dollar to the debt with the **highest interest rate**. When that's gone, roll its payment into the next-highest-rate debt. Mathematically optimal - minimizes total interest paid.
 
 ## The Snowball method
 
@@ -16,10 +16,10 @@ The avalanche saves money. The snowball produces motivation. Behavioral economis
 
 ## Both methods require the same prerequisites
 
-1. Stop adding new debt — close or hide the credit cards.
+1. Stop adding new debt - close or hide the credit cards.
 2. Build a $1,000 starter emergency fund first; otherwise the next surprise expense becomes new debt.
 3. List all debts with: balance, minimum payment, APR, and lender.
-4. Find your "extra" — every dollar above minimums you can throw at debt.
+4. Find your "extra" - every dollar above minimums you can throw at debt.
 
 ## High-interest debt comes first regardless of method
 

@@ -32,7 +32,7 @@ python scripts\ingest_docs.py
 uvicorn app.main:app --reload --port 8000
 ```
 
-API will be at http://localhost:8000 — visit `/docs` for the auto-generated Swagger UI.
+API will be at http://localhost:8000 - visit `/docs` for the auto-generated Swagger UI.
 
 ## 3. Frontend (in a new terminal)
 
@@ -51,7 +51,7 @@ Open http://localhost:5173.
 docker compose up -d
 ```
 
-- n8n: http://localhost:5678 — set up your owner account, then **Workflows → Import** `n8n/workflows/finance-assistant.json` and **Activate**.
+- n8n: http://localhost:5678 - set up your owner account, then **Workflows → Import** `n8n/workflows/finance-assistant.json` and **Activate**.
 - Redis is reachable internally on `localhost:6379` for the backend cache.
 
 ## Smoke test
@@ -60,7 +60,7 @@ In the React UI, click any of the suggested-prompt chips on the left. You should
 
 1. The user bubble appear, then a typing indicator.
 2. The assistant message render with markdown.
-3. A "agent → get_spending_summary" trace below the bubble — click to expand and see the tool args + result preview.
+3. A "agent → get_spending_summary" trace below the bubble - click to expand and see the tool args + result preview.
 4. The right-side Insights panel populating with charts.
 
 If the chat fails, check:
@@ -72,10 +72,10 @@ If the chat fails, check:
 
 ## Common issues
 
-**`ModuleNotFoundError: app`** — run uvicorn from `backend/` directory, not the project root.
+**`ModuleNotFoundError: app`** - run uvicorn from `backend/` directory, not the project root.
 
-**ChromaDB telemetry warnings** — harmless; we disable telemetry in `retriever.py`.
+**ChromaDB telemetry warnings** - harmless; we disable telemetry in `retriever.py`.
 
-**n8n can't reach the backend** — Docker uses `host.docker.internal` to refer to your host machine on Windows/Mac. On Linux, edit the workflow's HTTP Request node to use your LAN IP instead.
+**n8n can't reach the backend** - Docker uses `host.docker.internal` to refer to your host machine on Windows/Mac. On Linux, edit the workflow's HTTP Request node to use your LAN IP instead.
 
-**OpenAI 401** — your API key is wrong or has no quota. The free tier requires manual top-up.
+**OpenAI 401** - your API key is wrong or has no quota. The free tier requires manual top-up.

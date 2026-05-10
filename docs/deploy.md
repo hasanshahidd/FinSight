@@ -1,6 +1,6 @@
 # Deployment guide
 
-The stack is **FastAPI + ChromaDB + SQLite (backend)**, **Vite/React (frontend)**, **n8n (orchestration)**, and **Redis (cache)**. Everything is containerized — `docker compose up -d` from the repo root brings it up locally and that same compose file is the deployment unit on most hosts below.
+The stack is **FastAPI + ChromaDB + SQLite (backend)**, **Vite/React (frontend)**, **n8n (orchestration)**, and **Redis (cache)**. Everything is containerized - `docker compose up -d` from the repo root brings it up locally and that same compose file is the deployment unit on most hosts below.
 
 You need only one external secret: **`OPENAI_API_KEY`**. Everything else (databases, n8n, vector store) is self-contained.
 
@@ -8,12 +8,12 @@ You need only one external secret: **`OPENAI_API_KEY`**. Everything else (databa
 
 ## Free deployment options (not Railway)
 
-### Option 1 — Oracle Cloud Always Free (recommended for full stack)
+### Option 1 - Oracle Cloud Always Free (recommended for full stack)
 
 **Why**: free *forever* (not credits), 4 ARM cores + 24GB RAM, plenty for ChromaDB embeddings and three containers.
 
 **Steps**:
-1. Sign up at https://cloud.oracle.com/free — pick the Always Free Ampere A1 shape (ARM, 4 OCPU / 24 GB).
+1. Sign up at https://cloud.oracle.com/free - pick the Always Free Ampere A1 shape (ARM, 4 OCPU / 24 GB).
 2. Create a `VM.Standard.A1.Flex` instance with Ubuntu 22.04. Open ports **22, 80, 5173, 5678, 8000** in the security list.
 3. SSH in, install Docker:
    ```bash
@@ -32,7 +32,7 @@ You need only one external secret: **`OPENAI_API_KEY`**. Everything else (databa
 
 ---
 
-### Option 2 — Render (zero-config, free with cold starts)
+### Option 2 - Render (zero-config, free with cold starts)
 
 **Why**: simplest. Connect GitHub, push, auto-deploy. Free web services sleep after 15 minutes idle.
 
@@ -47,7 +47,7 @@ You need only one external secret: **`OPENAI_API_KEY`**. Everything else (databa
 
 ---
 
-### Option 3 — Fly.io ($5/month free credit, no sleep)
+### Option 3 - Fly.io ($5/month free credit, no sleep)
 
 **Why**: $5/month auto-grant covers a small backend + n8n machine if sized to ~256 MB. No cold starts.
 
@@ -71,7 +71,7 @@ flyctl deploy
 
 ---
 
-### Option 4 — Hugging Face Spaces (Docker SDK, 16 GB RAM free)
+### Option 4 - Hugging Face Spaces (Docker SDK, 16 GB RAM free)
 
 **Why**: 16 GB RAM is huge. Single-container, so bundle backend + n8n via supervisord or just deploy backend and put n8n elsewhere.
 
@@ -80,11 +80,11 @@ flyctl deploy
 3. Add `OPENAI_API_KEY` as a Space Secret.
 4. The Space gets a public URL like `https://<user>-finsight.hf.space`.
 
-n8n is harder to fit in a single Space — easier to host n8n on Render/Fly and the backend on HF Spaces.
+n8n is harder to fit in a single Space - easier to host n8n on Render/Fly and the backend on HF Spaces.
 
 ---
 
-### Option 5 — Cloud Run (Google) — generous, pay-per-second
+### Option 5 - Cloud Run (Google) - generous, pay-per-second
 
 **Why**: 2 million requests/month free, pay only when traffic hits. No cold start surcharge for the free tier.
 
@@ -100,7 +100,7 @@ n8n on Cloud Run works the same way with image `n8nio/n8n:latest`.
 
 ---
 
-## Frontend — always deploy as a static site
+## Frontend - always deploy as a static site
 
 Wherever the backend lives, the frontend is just a Vite-built static bundle. **Free hosts**:
 
@@ -121,15 +121,15 @@ VITE_N8N_WEBHOOK_URL=https://<n8n-public-url>/webhook/finance-chat
 
 ---
 
-## Redis — soft dependency, can be skipped
+## Redis - soft dependency, can be skipped
 
-Redis is used for **one thing only**: persisting token + $ cost rollups across chat requests (powers `/api/admin/cost` and the eval scoreboard's cost figures). Everything else — chat, RAG, agent memory, analytics — runs without it.
+Redis is used for **one thing only**: persisting token + $ cost rollups across chat requests (powers `/api/admin/cost` and the eval scoreboard's cost figures). Everything else - chat, RAG, agent memory, analytics - runs without it.
 
 The cache layer fails gracefully: if Redis isn't reachable, [`get_redis()`](../backend/app/core/cache.py) logs one warning and `cache_get`/`cache_set` no-op. The app stays fully functional; you just don't get accumulated cost numbers.
 
 **Free options if you want cost tracking**:
-- **Upstash** — 10k commands/day, 256 MB. More than enough (the cache writes ~2 keys per chat request). https://upstash.com
-- **Redis Labs** — 30 MB free. https://redis.com
+- **Upstash** - 10k commands/day, 256 MB. More than enough (the cache writes ~2 keys per chat request). https://upstash.com
+- **Redis Labs** - 30 MB free. https://redis.com
 
 **Skip Redis (recommended for a demo)**:
 - Don't set `REDIS_URL` in deployed env vars (or leave it pointing at a non-existent host)
@@ -186,4 +186,4 @@ Deploying to a free host shows:
 - Secret hygiene (env vars, not committed)
 - Cold-start handling (memory loaded once per worker)
 
-For the assessment recording, deployment isn't strictly required — the docker-compose + ngrok flow lets a recruiter run it locally in two minutes. But a live URL in the README adds polish.
+For the assessment recording, deployment isn't strictly required - the docker-compose + ngrok flow lets a recruiter run it locally in two minutes. But a live URL in the README adds polish.

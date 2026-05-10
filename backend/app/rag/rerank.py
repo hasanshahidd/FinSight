@@ -1,4 +1,4 @@
-"""Cross-encoder reranker — optional. Lazy import; degrades gracefully if
+"""Cross-encoder reranker - optional. Lazy import; degrades gracefully if
 sentence-transformers is not installed."""
 
 from app.core.logging import get_logger

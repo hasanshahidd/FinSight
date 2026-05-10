@@ -36,7 +36,7 @@ def resolve_period(period: str, now: datetime | None = None) -> tuple[datetime, 
     elif period in PERIODS_DAYS:
         start = n - timedelta(days=PERIODS_DAYS[period])
     else:
-        # Unknown period — default to last 7 days
+        # Unknown period - default to last 7 days
         start = n - timedelta(days=7)
     return start, n
 

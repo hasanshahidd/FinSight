@@ -1,4 +1,4 @@
-"""Smoke tests against the FastAPI app — verifies routes wire up + return JSON."""
+"""Smoke tests against the FastAPI app - verifies routes wire up + return JSON."""
 
 import pytest
 from httpx import ASGITransport, AsyncClient

@@ -12,13 +12,13 @@ In a zero-based budget, **every dollar of income is assigned a job before the mo
 
 ## Why it works
 
-Behavioral research shows people overspend in undefined categories. Naming the dollar — "this $200 is for groceries, not for whatever" — reduces leakage. It also surfaces lifestyle creep: when income rises, the gap between income and allocations is visible.
+Behavioral research shows people overspend in undefined categories. Naming the dollar - "this $200 is for groceries, not for whatever" - reduces leakage. It also surfaces lifestyle creep: when income rises, the gap between income and allocations is visible.
 
 ## Common variations
 
 - **YNAB method**: forward-looking, only budget money you already have ("age your money").
 - **Sinking funds**: monthly allocations to irregular expenses (annual insurance, car registration, holiday gifts) so they don't break the budget when due.
-- **Cash envelope**: zero-based with physical cash for variable categories — modern equivalent is multiple bank accounts.
+- **Cash envelope**: zero-based with physical cash for variable categories - modern equivalent is multiple bank accounts.
 
 ## When it underperforms
 
@@ -27,5 +27,5 @@ Zero-based budgeting is high-effort. If you don't reconcile transactions weekly,
 ## Tips for sticking with it
 
 - Reconcile weekly, not monthly. Small drift is easy to fix; big drift kills motivation.
-- Build a "buffer" or "miscellaneous" line — eliminates the temptation to fudge other categories.
+- Build a "buffer" or "miscellaneous" line - eliminates the temptation to fudge other categories.
 - Review and re-budget every month; do not copy last month's plan blindly.

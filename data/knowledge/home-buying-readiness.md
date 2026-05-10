@@ -1,6 +1,6 @@
 # Home Buying Readiness Checklist
 
-Buying a home is the largest single transaction most people will make. The decision is more often emotional than financial, which is exactly why a readiness checklist helps — it forces the financial question first.
+Buying a home is the largest single transaction most people will make. The decision is more often emotional than financial, which is exactly why a readiness checklist helps - it forces the financial question first.
 
 ## The financial readiness tests
 
@@ -15,7 +15,7 @@ Mortgage underwriters want a 24-month employment history (or self-employment wit
 The down payment + closing costs (2–5%) should sit in a HYSA, not the stock market. Two years of equities can drop 30%; you can't time-shift a closing.
 
 ### 3. Emergency fund still intact *after* closing
-Buying with your last $5k is a common path to first-year financial stress. Hold a separate 3–6 month fund post-closing — appliances die, roofs leak, property taxes are due.
+Buying with your last $5k is a common path to first-year financial stress. Hold a separate 3–6 month fund post-closing - appliances die, roofs leak, property taxes are due.
 
 ### 4. Total housing cost ≤ 28% of gross income
 "Housing cost" means **PITI**: Principal + Interest + Property Tax + Insurance. Plus HOA dues if applicable. The 28% rule is a guideline; in expensive cities people stretch to 35%, but at >40% the budget tightens uncomfortably.
@@ -24,7 +24,7 @@ Buying with your last $5k is a common path to first-year financial stress. Hold 
 PITI + auto loan + minimum credit-card payments + student loans. Lenders cap most loans at 43–45% DTI. Healthy borrowers come in well under that.
 
 ### 6. Plan to stay 5+ years
-Closing costs (2–5%) + selling costs (5–6%) eat ~7–11% of the home value as round-trip transaction friction. Selling within 3 years usually means losing money relative to renting. The break-even depends on appreciation — there's no universal number.
+Closing costs (2–5%) + selling costs (5–6%) eat ~7–11% of the home value as round-trip transaction friction. Selling within 3 years usually means losing money relative to renting. The break-even depends on appreciation - there's no universal number.
 
 ## The lifestyle readiness questions
 
@@ -38,11 +38,11 @@ Closing costs (2–5%) + selling costs (5–6%) eat ~7–11% of the home value a
 - The price-to-rent ratio in your city is > 21 (annual rent × 21 < house price → renting is mathematically favored).
 - You haven't built a 3–6 month emergency fund yet.
 - Your industry is volatile.
-- You want to invest the down payment in equities for higher long-run return — this often beats home appreciation, especially after costs.
+- You want to invest the down payment in equities for higher long-run return - this often beats home appreciation, especially after costs.
 
 ## What "house poor" looks like
 
-Closing day was great. Six months later: no margin for car repair, no vacation, can't max retirement, and the property tax bill arrives. House-poor is not a tax bracket — it's a budget where housing crowds out everything else. The 28% rule exists to prevent this.
+Closing day was great. Six months later: no margin for car repair, no vacation, can't max retirement, and the property tax bill arrives. House-poor is not a tax bracket - it's a budget where housing crowds out everything else. The 28% rule exists to prevent this.
 
 ## Practical sequence
 
@@ -50,4 +50,4 @@ Closing day was great. Six months later: no margin for car repair, no vacation, 
 2. Pay down credit cards to <10% utilization (improves rate).
 3. Get pre-approved by 2–3 lenders (rate-shopping in a 14-day window is one credit hit).
 4. House hunt within pre-approval × 0.85 (leaves negotiation + appraisal margin).
-5. Inspect, negotiate, close — typically 30–45 days from offer.
+5. Inspect, negotiate, close - typically 30–45 days from offer.

@@ -1,4 +1,4 @@
-"""LangChain tool catalog (13 tools) — the only knobs available to the agent.
+"""LangChain tool catalog (13 tools) - the only knobs available to the agent.
 
 Categories:
   Transactions:  get_transactions, search_transactions_semantic,
@@ -8,7 +8,7 @@ Categories:
   Knowledge:     search_financial_knowledge
   Budgets:       get_budgets, evaluate_budget_status, propose_budget
 
-Caching is intentionally NOT applied as a decorator over @tool — wrapping
+Caching is intentionally NOT applied as a decorator over @tool - wrapping
 LangChain's @tool with another decorator risks introspection regressions.
 Where caching pays off (e.g. RAG retrieval), it is added inside the tool
 body via app.core.cache.
@@ -70,7 +70,7 @@ async def get_transactions(
             f"{len(rows)} txns"
             + (f" in {category}" if category else "")
             + (f" matching '{merchant}'" if merchant else "")
-            + (f" — ${total:,.2f} debit total" if total else "")
+            + (f" - ${total:,.2f} debit total" if total else "")
         ),
         "count": len(rows),
         "transactions": [
@@ -91,7 +91,7 @@ async def search_transactions_semantic(
     user_id: Annotated[str, "User id"] = "user_1",
 ) -> dict:
     """Semantic search over the user's transactions. Use when category/merchant
-    filtering won't work — e.g. fuzzy concepts ('coffee', 'late-night spending')."""
+    filtering won't work - e.g. fuzzy concepts ('coffee', 'late-night spending')."""
     async with SessionLocal() as session:
         return await _semantic_txn_search(session, user_id, query, k=k)
 
@@ -215,7 +215,7 @@ async def get_budgets(
     items = [{"category": r.category, "monthly_limit": r.monthly_limit} for r in rows]
     total = sum(i["monthly_limit"] for i in items)
     return {
-        "_summary": f"{len(items)} budget categories — total ${total:,.2f}/mo",
+        "_summary": f"{len(items)} budget categories - total ${total:,.2f}/mo",
         "items": items,
         "total_monthly": round(total, 2),
     }

@@ -37,7 +37,7 @@ async def get_recurring_transactions(
 
     return {
         "_summary": (
-            f"{len(rows)} recurring charge(s) identified — about ${monthly_total:,.2f}/month"
+            f"{len(rows)} recurring charge(s) identified - about ${monthly_total:,.2f}/month"
             if rows else "No recurring charges detected."
         ),
         "count": len(rows),

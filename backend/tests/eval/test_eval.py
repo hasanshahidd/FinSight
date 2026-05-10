@@ -18,7 +18,7 @@ async def test_eval_aggregate():
     payload = await run_eval(max_cases=cap)
     sb = payload["scoreboard"]
 
-    # Loose floors — adjust upward as the system stabilizes
+    # Loose floors - adjust upward as the system stabilizes
     assert sb["routing_accuracy"] >= 0.5, f"Routing too low: {sb}"
     assert sb["tool_coverage"] >= 0.5, f"Tool coverage too low: {sb}"
     assert sb["judge_helpfulness"] >= 0.5, f"Judge helpfulness too low: {sb}"

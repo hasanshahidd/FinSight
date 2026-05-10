@@ -1,5 +1,5 @@
 /**
- * Single chat hook. ALL chat requests route through the n8n webhook —
+ * Single chat hook. ALL chat requests route through the n8n webhook -
  * no alternative paths. This satisfies the assessment's n8n-orchestration
  * requirement: every user message goes:
  *

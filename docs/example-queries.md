@@ -1,6 +1,6 @@
 # Example Queries & Expected Behavior
 
-These showcase the agent's decision-making. The tool sequence is what the LLM should choose — it's not enforced in code.
+These showcase the agent's decision-making. The tool sequence is what the LLM should choose - it's not enforced in code.
 
 ## Pure transaction queries → `get_transactions` / `get_spending_summary`
 
@@ -34,7 +34,7 @@ These showcase the agent's decision-making. The tool sequence is what the LLM sh
 
 | Query | Expected tools |
 |---|---|
-| "I'm spending too much on takeout — what should I do?" | `get_transactions(category="Dining")` → `search_financial_knowledge("reduce food spending")` → grounded answer with the user's actual numbers + the playbook |
+| "I'm spending too much on takeout - what should I do?" | `get_transactions(category="Dining")` → `search_financial_knowledge("reduce food spending")` → grounded answer with the user's actual numbers + the playbook |
 | "Based on my spending, suggest a budget" | `get_spending_summary` → `search_financial_knowledge("budgeting framework")` → personalized 50/30/20 breakdown |
 | "Am I saving enough?" | `get_spending_summary` (compute net) → `search_financial_knowledge("savings rate")` → context-aware answer |
 | "I just got a raise, what should I do with it?" | `search_financial_knowledge("financial priorities")` (no transaction lookup needed) |
@@ -45,7 +45,7 @@ These showcase the agent's decision-making. The tool sequence is what the LLM sh
 User:  How much did I spend on dining last week?
 Agent: [calls get_spending_summary] You spent $87.40 on dining over 6 transactions last week.
 User:  Is that more than usual?
-Agent: [recalls "dining last week" from prior turn, calls get_spending_trend] Yes — it's about 18% higher
+Agent: [recalls "dining last week" from prior turn, calls get_spending_trend] Yes - it's about 18% higher
        than your 4-week average for dining ($74.10).
 User:  How can I bring it down?
 Agent: [calls search_financial_knowledge] [grounded answer citing reducing-food-spending.md]

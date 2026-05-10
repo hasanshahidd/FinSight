@@ -15,12 +15,12 @@ Where:
 
 ## Why it dominates long horizons
 
-A single $10,000 invested at 8% for 40 years grows to ~$217,000 — over 21x — with no further contribution. The same amount over 10 years yields ~$22,000, only doubling. The last decade adds more dollars than the first three combined. **Time is the single most valuable input.**
+A single $10,000 invested at 8% for 40 years grows to ~$217,000 - over 21x - with no further contribution. The same amount over 10 years yields ~$22,000, only doubling. The last decade adds more dollars than the first three combined. **Time is the single most valuable input.**
 
 ## Practical implications
 
 1. **Start now, even small.** $200/month from age 22 to 65 at 8% ≈ $700,000. Same $200/month from age 35 ≈ $300,000. The 13 extra years cost over $400,000.
-2. **Match-eligible 401(k) contributions are free money** — instant 50–100% return that compounds. Always capture the full employer match.
+2. **Match-eligible 401(k) contributions are free money** - instant 50–100% return that compounds. Always capture the full employer match.
 3. **High fees compound against you.** A 1% expense ratio over 30 years can consume ~25% of your final balance. Prefer low-cost index funds.
 4. **Consumer debt compounds the wrong way.** Credit cards at 22% APR double the balance in roughly 3–4 years if unpaid.
 

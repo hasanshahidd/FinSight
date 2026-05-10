@@ -11,17 +11,17 @@ Subscription creep is one of the most common silent budget killers. The average 
 
 ## Categories to scrutinize first
 
-- **Streaming video** — typical household: Netflix + Hulu + Disney+ + HBO Max + Prime. Few watch all five regularly. Rotate: subscribe one month, watch a season, cancel, rotate.
-- **Music** — Spotify, Apple Music, SiriusXM, YouTube Premium. Most people only use one heavily.
-- **Cloud storage** — overlapping iCloud, Google One, Dropbox, OneDrive plans.
-- **News & reading** — multiple paywalled newspapers / magazines often duplicate coverage.
-- **Software / apps** — productivity, photo editors, language apps. Many have free tiers that cover 80%+ of use.
-- **Gym / fitness apps** — gym + Peloton + Apple Fitness + ClassPass. Pick one.
-- **Insurance / warranties** — extended warranties on phones and electronics rarely pay out; identity-theft insurance is often duplicated by credit cards.
+- **Streaming video** - typical household: Netflix + Hulu + Disney+ + HBO Max + Prime. Few watch all five regularly. Rotate: subscribe one month, watch a season, cancel, rotate.
+- **Music** - Spotify, Apple Music, SiriusXM, YouTube Premium. Most people only use one heavily.
+- **Cloud storage** - overlapping iCloud, Google One, Dropbox, OneDrive plans.
+- **News & reading** - multiple paywalled newspapers / magazines often duplicate coverage.
+- **Software / apps** - productivity, photo editors, language apps. Many have free tiers that cover 80%+ of use.
+- **Gym / fitness apps** - gym + Peloton + Apple Fitness + ClassPass. Pick one.
+- **Insurance / warranties** - extended warranties on phones and electronics rarely pay out; identity-theft insurance is often duplicated by credit cards.
 
 ## The "calendar reminder" trick
 
-For free trials and annual subscriptions, set a calendar reminder for **2 days before renewal**. Decide *then* if the service earned another year. Default to canceling and re-subscribing if you miss it — reactivation friction is the point.
+For free trials and annual subscriptions, set a calendar reminder for **2 days before renewal**. Decide *then* if the service earned another year. Default to canceling and re-subscribing if you miss it - reactivation friction is the point.
 
 ## Tools
 

@@ -1,4 +1,4 @@
-# n8n — FinSight Chat Orchestration
+# n8n - FinSight Chat Orchestration
 
 This directory holds the n8n workflow that **sits in the live request path** between the React frontend and the FastAPI backend.
 
@@ -11,7 +11,7 @@ The React UI does **not** call the backend's `/api/chat` directly. Instead it po
 3. **Logs** the interaction (tool calls, citations) for observability.
 4. **Responds** to the webhook with the agent output, plus CORS headers for the SPA.
 
-This makes the workflow part of the production-style request lifecycle — exactly what the assessment asks for.
+This makes the workflow part of the production-style request lifecycle - exactly what the assessment asks for.
 
 ## How to import
 
@@ -44,6 +44,6 @@ Because the n8n container needs to reach FastAPI running on the host, the workfl
 
 Good places to add nodes:
 
-- **Authentication** node — verify a JWT before forwarding.
-- **Rate limit** branch — check Redis for per-user request count.
+- **Authentication** node - verify a JWT before forwarding.
+- **Rate limit** branch - check Redis for per-user request count.
 - **Switch** node by `tool_calls[].name` to fan out to different downstream systems (e.g., post to Slack when an agent decision matches a high-value pattern).

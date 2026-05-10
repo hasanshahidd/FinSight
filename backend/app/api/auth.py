@@ -1,4 +1,4 @@
-"""Mock auth endpoint — issues a JWT for the demo user."""
+"""Mock auth endpoint - issues a JWT for the demo user."""
 
 from fastapi import APIRouter
 from pydantic import BaseModel
@@ -21,6 +21,6 @@ class TokenResponse(BaseModel):
 
 @router.post("/login", response_model=TokenResponse)
 async def login(req: LoginRequest) -> TokenResponse:
-    # Mock — accept anything, always return the demo user.
+    # Mock - accept anything, always return the demo user.
     user_id = "user_1"
     return TokenResponse(access_token=create_access_token(user_id), user_id=user_id)

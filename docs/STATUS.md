@@ -2,11 +2,11 @@
 
 A snapshot of what's built, what's not, and what each sprint covered.
 
-## Sprint 0 — Scaffold ✅
+## Sprint 0 - Scaffold ✅
 
 84 files. Project structure, Vite/React frontend skeleton with full design system, FastAPI app boot, ChromaDB plumbing, 13 RAG docs, n8n workflow stub, basic seed (90 days, 1 user). Foundation for everything below.
 
-## Sprint 1 — "The bank is real" ✅
+## Sprint 1 - "The bank is real" ✅
 
 Theme: data + analytics layer is production-grade before any LLM touches it.
 
@@ -19,12 +19,12 @@ Theme: data + analytics layer is production-grade before any LLM touches it.
 - ✅ Request-id middleware + structlog JSON logging
 - ✅ Smoke tests for analytics + API
 
-## Sprint 2 — "The agent is real" ✅
+## Sprint 2 - "The agent is real" ✅
 
 Theme: multi-agent supervisor + hybrid RAG + streaming.
 
 - ✅ 13-tool catalog (transactions, insights, knowledge, budgets)
-- ✅ Supervisor with `ChatOpenAI.with_structured_output(RouteDecision)` — model-decided routing
+- ✅ Supervisor with `ChatOpenAI.with_structured_output(RouteDecision)` - model-decided routing
 - ✅ 4 specialist ReAct subgraphs with focused tool subsets and dedicated markdown prompts
 - ✅ LangGraph supergraph: `START → supervisor → conditional → specialist → END`
 - ✅ Memory compaction (summary-buffer at >40 messages)
@@ -46,21 +46,21 @@ Eight findings from the pre-Sprint-3 audit fixed:
 5. ✅ Unified `useChat` hook auto-routes to streaming/REST based on transport
 6. ✅ Added `pytest.ini` with `asyncio_mode = auto`
 7. ✅ Strongly-typed `TransactionSearchRequest` body model
-8. ✅ Frontend `.env.example` simplified — drops confusing transport flag
+8. ✅ Frontend `.env.example` simplified - drops confusing transport flag
 
-## Sprint 3 — "The system is real" ✅
+## Sprint 3 - "The system is real" ✅
 
 Theme: observability, n8n hardening, eval, demo polish.
 
 - ✅ Langfuse self-hosted via docker-compose (+ Postgres)
-- ✅ `app/core/tracing.py` — Langfuse callback handler wiring; injected into chat invocations
-- ✅ `app/core/metrics.py` — custom Prometheus counters/histograms (chat requests, tool invocations, tokens, cost, RAG latency, cache events)
-- ✅ `app/core/cost.py` — token + USD cost tracking per session and globally; aggregated in Redis
+- ✅ `app/core/tracing.py` - Langfuse callback handler wiring; injected into chat invocations
+- ✅ `app/core/metrics.py` - custom Prometheus counters/histograms (chat requests, tool invocations, tokens, cost, RAG latency, cache events)
+- ✅ `app/core/cost.py` - token + USD cost tracking per session and globally; aggregated in Redis
 - ✅ `/api/admin/cost` and `/api/admin/eval` endpoints
 - ✅ `n8n/workflows/finance-assistant.json` v2: validate → auth check → rate limit → backend → audit log → respond, with branching for errors
 - ✅ Eval harness: 30 golden queries in `tests/eval/golden.jsonl`, LLM-as-judge in `judge.py`, runner in `runner.py`, pytest wrapper that asserts loose floors
 
-## Sprint 4 — "The system is shipped" ✅
+## Sprint 4 - "The system is shipped" ✅
 
 Theme: frontend integration, demo wiring, README polish.
 
@@ -76,17 +76,17 @@ Theme: frontend integration, demo wiring, README polish.
 - ✅ Header includes PersonaSwitcher; switch resets the chat thread
 - ✅ Updated `App.tsx` to wire persona context end-to-end; insights re-fetch on persona change
 - ✅ Polished `README.md` with full setup, architecture, examples
-- ✅ `docs/demo-script.md` — 7-minute recording walkthrough
+- ✅ `docs/demo-script.md` - 7-minute recording walkthrough
 
 ## What's left
 
-- ⏳ **Demo video recording** — user-led; can't be automated. Script in [docs/demo-script.md](demo-script.md).
-- ⏳ **End-to-end smoke test** — user-led; run the stack and verify each capability described in the demo script. Bug-fix as needed.
-- ⏳ **Optional polish from runtime** — anything caught during smoke testing.
+- ⏳ **Demo video recording** - user-led; can't be automated. Script in [docs/demo-script.md](demo-script.md).
+- ⏳ **End-to-end smoke test** - user-led; run the stack and verify each capability described in the demo script. Bug-fix as needed.
+- ⏳ **Optional polish from runtime** - anything caught during smoke testing.
 
 ## Sprints remaining
 
-**Zero implementation sprints remaining.** What's left is the user-led demo recording and any runtime fixes from smoke testing — typically 0–1 short polish passes after that.
+**Zero implementation sprints remaining.** What's left is the user-led demo recording and any runtime fixes from smoke testing - typically 0–1 short polish passes after that.
 
 Definition-of-done from the original sprint plan, status:
 

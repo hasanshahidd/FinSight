@@ -1,6 +1,6 @@
 """Smoke tests for the analytics module.
 
-These don't assert exact numbers — the seeded data has known shape, but the
+These don't assert exact numbers - the seeded data has known shape, but the
 goal is structural correctness (right keys, no exceptions, sane numbers)."""
 
 import pytest

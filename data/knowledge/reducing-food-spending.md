@@ -1,6 +1,6 @@
 # Reducing Food Spending Without Misery
 
-Food is the most variable line item in most budgets and the easiest place to overspend invisibly. The goal is not to live on rice and beans — it's to capture the gap between *what you actually enjoy* and *what you currently spend*.
+Food is the most variable line item in most budgets and the easiest place to overspend invisibly. The goal is not to live on rice and beans - it's to capture the gap between *what you actually enjoy* and *what you currently spend*.
 
 ## Diagnose first: groceries vs. dining out
 
@@ -22,16 +22,16 @@ Most overspending sits in **dining out + convenience**, not groceries. Household
 
 ## Tactics that move smaller amounts
 
-- **Generic store brands** for staples (flour, sugar, pasta, basic spices) — typically 20–40% cheaper, often the same supplier.
-- **Frozen vegetables** for cooking — cheaper, less waste, similar nutrition.
+- **Generic store brands** for staples (flour, sugar, pasta, basic spices) - typically 20–40% cheaper, often the same supplier.
+- **Frozen vegetables** for cooking - cheaper, less waste, similar nutrition.
 - **Cook one big batch on Sunday**, eat from it for 2–3 lunches.
 - **Drink water at restaurants.** Drinks (esp. alcohol) are the highest-margin items; skipping them often saves $8–15 per meal.
 
 ## What rarely works
 
-- Extreme couponing — high time investment for modest savings unless you're already running a stockpile system.
-- Aggressive "no eating out for a month" challenges — strong start, fast collapse. Sustainable moderation beats temporary restriction.
-- Switching from one delivery app to another for "promo codes" — net effect is roughly zero, and the convenience habit gets reinforced.
+- Extreme couponing - high time investment for modest savings unless you're already running a stockpile system.
+- Aggressive "no eating out for a month" challenges - strong start, fast collapse. Sustainable moderation beats temporary restriction.
+- Switching from one delivery app to another for "promo codes" - net effect is roughly zero, and the convenience habit gets reinforced.
 
 ## How to know if you've cut too far
 

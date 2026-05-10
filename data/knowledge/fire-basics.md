@@ -1,4 +1,4 @@
-# Financial Independence / Retire Early (FIRE) — The Basic Math
+# Financial Independence / Retire Early (FIRE) - The Basic Math
 
 FIRE is the goal of accumulating enough investment income to cover your expenses indefinitely, freeing you from needing employment. The math is simple; the discipline is hard.
 
@@ -6,7 +6,7 @@ FIRE is the goal of accumulating enough investment income to cover your expenses
 
 The Trinity Study (1998, updated multiple times) found that retirees withdrawing 4% of their portfolio in year 1, then increasing by inflation each year after, had a >95% chance of not running out of money over 30 years.
 
-The implication: **once your portfolio reaches 25× your annual expenses**, you can — historically — live off it indefinitely.
+The implication: **once your portfolio reaches 25× your annual expenses**, you can - historically - live off it indefinitely.
 
 > FI number = annual expenses × 25
 
@@ -37,7 +37,7 @@ The reason high savings rate compounds doubly: you invest more *and* you live on
 - **Lean FIRE**: minimal lifestyle (~$30–40k/yr expenses). Faster path; tighter post-FI life.
 - **Regular FIRE**: middle-class lifestyle (~$50–70k/yr).
 - **Fat FIRE**: comfortable upper-middle lifestyle (~$100k+/yr). Slower path; more flexibility.
-- **Coast FIRE**: invest enough early that compound growth alone gets you to FI by traditional retirement age — *without further contributions*. After hitting Coast FI, you only need to cover current expenses, no further saving required.
+- **Coast FIRE**: invest enough early that compound growth alone gets you to FI by traditional retirement age - *without further contributions*. After hitting Coast FI, you only need to cover current expenses, no further saving required.
 - **Barista FIRE**: invest enough that part-time work covers current expenses while investments grow.
 
 ## What FIRE math gets right
@@ -48,17 +48,17 @@ The reason high savings rate compounds doubly: you invest more *and* you live on
 
 ## What FIRE math leaves out
 
-- **Healthcare in the US** before Medicare (65) is a real cost — ACA subsidies help but require careful tax planning.
-- **Sequence-of-returns risk** — retiring into a market crash can devastate a 4%-rule portfolio. Strategies: maintain 1–2 years cash buffer, dynamic withdrawal rules, or willingness to earn small income temporarily.
-- **Inflation surprises** — 2021–2023 inflation tested the rule.
-- **Longevity** — 4% over 30 years is well-tested; over 50 years is more like 3–3.5%.
+- **Healthcare in the US** before Medicare (65) is a real cost - ACA subsidies help but require careful tax planning.
+- **Sequence-of-returns risk** - retiring into a market crash can devastate a 4%-rule portfolio. Strategies: maintain 1–2 years cash buffer, dynamic withdrawal rules, or willingness to earn small income temporarily.
+- **Inflation surprises** - 2021–2023 inflation tested the rule.
+- **Longevity** - 4% over 30 years is well-tested; over 50 years is more like 3–3.5%.
 
 ## Practical first steps
 
-1. Track expenses for 6 months — get a real number, not an estimate.
+1. Track expenses for 6 months - get a real number, not an estimate.
 2. Compute your FI number = (annual expenses) × 25.
 3. Compute your current savings rate.
-4. Increase savings rate by 5% — automate the increase, raise contributions to 401(k)/IRA.
+4. Increase savings rate by 5% - automate the increase, raise contributions to 401(k)/IRA.
 5. Invest in low-cost broad-market index funds (VTI, VXUS, BND or similar).
 6. Re-check in 12 months. Iterate.
 

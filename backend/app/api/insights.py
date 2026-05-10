@@ -27,7 +27,7 @@ async def suggestions_context(
     "How much did I spend on {category}?" into concrete suggestions.
     """
     # Expenses are stored as negative amounts; income as positive. We want
-    # spending categories/merchants only — filter to amount < 0 and order by
+    # spending categories/merchants only - filter to amount < 0 and order by
     # absolute spend / frequency.
     cat_q = (
         select(Transaction.category, func.sum(func.abs(Transaction.amount)).label("total"))

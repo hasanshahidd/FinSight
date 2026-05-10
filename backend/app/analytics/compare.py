@@ -57,7 +57,7 @@ async def compare_periods(
     grand_pct = ((a_total - b_total) / b_total * 100) if b_total else None
     return {
         "_summary": (
-            f"{period_a}: ${a_total:,.2f} vs {period_b}: ${b_total:,.2f} — "
+            f"{period_a}: ${a_total:,.2f} vs {period_b}: ${b_total:,.2f} - "
             f"{'+' if (grand_pct or 0) >= 0 else ''}{grand_pct:.1f}%"
             if grand_pct is not None
             else f"{period_a}: ${a_total:,.2f}; no comparable prior window"

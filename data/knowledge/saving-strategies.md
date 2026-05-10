@@ -6,16 +6,16 @@ Saving more is mostly behavioral, not informational. Most people know they shoul
 
 The single highest-impact change is to **make saving the default action**. Set up an automatic transfer from checking to savings/investments on the day after payday. The amount that doesn't reach your checking account doesn't get spent.
 
-- Start with whatever you can — even $50/month.
+- Start with whatever you can - even $50/month.
 - Increase the automation by 1% of income every 3 months until you hit your target rate.
 - Use **separate accounts at separate banks** if you tend to "borrow" from savings.
 
 ## Pay yourself first
 
-Treat savings as a non-negotiable bill — same priority as rent. Common ladder:
+Treat savings as a non-negotiable bill - same priority as rent. Common ladder:
 
 1. **Capture employer 401(k) match** (instant 50–100% return).
-2. **High-interest debt payoff** (>7% APR) — guaranteed return.
+2. **High-interest debt payoff** (>7% APR) - guaranteed return.
 3. **Emergency fund** to 3–6 months.
 4. **Roth IRA** to limit ($7,000 in 2024, $7,500 if 50+).
 5. **Max 401(k)** to limit ($23,000).

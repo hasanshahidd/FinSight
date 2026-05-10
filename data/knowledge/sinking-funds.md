@@ -1,8 +1,8 @@
-# Sinking Funds — Stop Being Surprised by "Surprise" Expenses
+# Sinking Funds - Stop Being Surprised by "Surprise" Expenses
 
 A **sinking fund** is a savings target you contribute to monthly so that when an irregular expense arrives, the money is already there. The name comes from accounting: a "sinking fund" sets aside money to retire a future debt.
 
-The premise: most "emergencies" aren't emergencies — they're predictable expenses you didn't plan for. Property taxes, car registration, holiday gifts, annual insurance, replacing a laptop. These don't surprise you in *whether* they'll happen — they surprise you because the amount lands in one chunk.
+The premise: most "emergencies" aren't emergencies - they're predictable expenses you didn't plan for. Property taxes, car registration, holiday gifts, annual insurance, replacing a laptop. These don't surprise you in *whether* they'll happen - they surprise you because the amount lands in one chunk.
 
 ## The sinking-fund move
 
@@ -32,7 +32,7 @@ Now December feels like nothing. The pain was distributed across the year.
 Two practical patterns:
 
 1. **One savings account, multiple "buckets" tracked in a spreadsheet.** Simpler. Most people pick this.
-2. **Multiple labeled sub-accounts** (Ally, SoFi, Capital One 360 all support this). Cleaner mental model — when the auto-insurance bill arrives, you transfer from "Auto Insurance" to checking.
+2. **Multiple labeled sub-accounts** (Ally, SoFi, Capital One 360 all support this). Cleaner mental model - when the auto-insurance bill arrives, you transfer from "Auto Insurance" to checking.
 
 Automate the monthly transfer the day after payday. Treat sinking funds as bills.
 

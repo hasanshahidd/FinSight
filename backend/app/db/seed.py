@@ -74,7 +74,7 @@ def _generate_persona_txns(persona: Persona, accounts: dict[str, Account]) -> li
     start = now - timedelta(days=DATASET_DAYS)
     rows: list[_GeneratedTxn] = []
 
-    # 1) Income — bi-weekly (or as configured)
+    # 1) Income - bi-weekly (or as configured)
     for income in persona.incomes:
         if income.amount <= 0:
             continue
@@ -87,12 +87,12 @@ def _generate_persona_txns(persona: Persona, accounts: dict[str, Account]) -> li
                 category="Income",
                 subcategory="payroll",
                 merchant=income.merchant,
-                description=f"Direct deposit — {income.merchant}",
+                description=f"Direct deposit - {income.merchant}",
                 is_recurring=True,
             ))
             d += timedelta(days=income.cadence_days)
 
-    # 2) Rent — monthly
+    # 2) Rent - monthly
     if persona.rent_amount > 0:
         d = start.replace(day=min(persona.rent_day_of_month, 28))
         if d < start:
@@ -110,7 +110,7 @@ def _generate_persona_txns(persona: Persona, accounts: dict[str, Account]) -> li
             ))
             d = (d + timedelta(days=32)).replace(day=min(persona.rent_day_of_month, 28))
 
-    # 3) Subscriptions — recurring monthly with optional start offsets
+    # 3) Subscriptions - recurring monthly with optional start offsets
     for sub in persona.subscriptions:
         sub_start = start + timedelta(days=max(sub.starts_offset_days, 0))
         if sub.starts_offset_days < 0:
@@ -121,7 +121,7 @@ def _generate_persona_txns(persona: Persona, accounts: dict[str, Account]) -> li
         if sub.starts_offset_days > 0:
             sub_start = start + timedelta(days=sub.starts_offset_days)
         elif sub.starts_offset_days < 0 and abs(sub.starts_offset_days) < DATASET_DAYS:
-            # subscription started after dataset start — splice in mid-dataset
+            # subscription started after dataset start - splice in mid-dataset
             sub_start = now + timedelta(days=sub.starts_offset_days)
             if sub_start < start:
                 sub_start = start
@@ -142,7 +142,7 @@ def _generate_persona_txns(persona: Persona, accounts: dict[str, Account]) -> li
             ))
             d = (d + timedelta(days=32)).replace(day=min(sub.day_of_month, 28))
 
-    # 4) Utilities — twice-monthly variable
+    # 4) Utilities - twice-monthly variable
     if "Utilities" in persona.merchants_by_category:
         for day_in_month in (10, 25):
             d = start.replace(day=min(day_in_month, 28))
@@ -164,7 +164,7 @@ def _generate_persona_txns(persona: Persona, accounts: dict[str, Account]) -> li
                 ))
                 d = (d + timedelta(days=32)).replace(day=min(day_in_month, 28))
 
-    # 5) Daily discretionary spending — drawn from category weights
+    # 5) Daily discretionary spending - drawn from category weights
     cat_pool: list[str] = []
     for cat, w in persona.category_weights.items():
         cat_pool.extend([cat] * w)
@@ -268,7 +268,7 @@ def _apply_stories(
                         category=cat,
                         subcategory=getattr(m, "subcategory", "") or "vacation",
                         merchant=m.name,
-                        description=f"{destination} trip — {m.name}",
+                        description=f"{destination} trip - {m.name}",
                     ))
 
         elif story.kind == "raise":
@@ -410,7 +410,7 @@ async def seed_persona(session: AsyncSession, persona: Persona) -> dict[str, int
     )
     session.add(user)
 
-    # Accounts — keyed by type so we can reference them
+    # Accounts - keyed by type so we can reference them
     accounts_by_type: dict[str, Account] = {}
     for spec in persona.accounts:
         acc = Account(

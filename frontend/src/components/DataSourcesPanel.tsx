@@ -29,7 +29,7 @@ export function DataSourcesPanel() {
             </div>
             <p className="text-slate-500 mt-0.5 leading-snug">
               5 personas · 2,763 transactions · 240-day history. Generated
-              deterministically — no real bank data.
+              deterministically - no real bank data.
             </p>
           </div>
           <div>
@@ -54,7 +54,7 @@ export function DataSourcesPanel() {
           </div>
           <div className="pt-1 border-t border-slate-200">
             <div className="text-slate-500">
-              Agent decides which DB to query via LLM tool-calling — no
+              Agent decides which DB to query via LLM tool-calling - no
               hardcoded routing.
             </div>
           </div>

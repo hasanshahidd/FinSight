@@ -1,8 +1,8 @@
-# FinSight AI — Backend Design (v2)
+# FinSight AI - Backend Design (v2)
 
-> **North star:** an AI engineer reviewing this should look at the architecture and say "that's how I'd build it in production." Not just a working chatbot — a system with real agency, observability, and grounded reasoning, on a data foundation rich enough to demonstrate every claim.
+> **North star:** an AI engineer reviewing this should look at the architecture and say "that's how I'd build it in production." Not just a working chatbot - a system with real agency, observability, and grounded reasoning, on a data foundation rich enough to demonstrate every claim.
 
-This document defines the **target backend** (what we're building toward in the 3-day sprint), not the current scaffold. The scaffold from Sprint 0 will be partially rewritten — sections marked **(REPLACE)** indicate where.
+This document defines the **target backend** (what we're building toward in the 3-day sprint), not the current scaffold. The scaffold from Sprint 0 will be partially rewritten - sections marked **(REPLACE)** indicate where.
 
 ---
 
@@ -32,7 +32,7 @@ That meets the spec. It does not differentiate. The decisions below are delibera
                │  WS  /api/chat/stream         (WebSocket, streaming tokens)   
                ▼                                                               
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│  n8n  (port 5678) — orchestration layer                                      │
+│  n8n  (port 5678) - orchestration layer                                      │
 │  ┌──────────────────────────────────────────────────────────────────────┐    │
 │  │ Webhook → Auth check → Rate-limit (Redis) → Switch by intent class   │    │
 │  │   ├── chat   → HTTP → backend /api/chat                              │    │
@@ -100,13 +100,13 @@ That meets the spec. It does not differentiate. The decisions below are delibera
 
 ### 2.1 Why supervisor + specialists, not one agent
 
-A single agent with 13 tools picks fine on average but degrades on ambiguous queries ("am I doing okay?"). Specialists with focused prompts make grounded decisions. The supervisor is itself an LLM call — **routing is still a model decision, not an `if/else`**, satisfying the rubric's hardest line item.
+A single agent with 13 tools picks fine on average but degrades on ambiguous queries ("am I doing okay?"). Specialists with focused prompts make grounded decisions. The supervisor is itself an LLM call - **routing is still a model decision, not an `if/else`**, satisfying the rubric's hardest line item.
 
 ### 2.2 Roles
 
 | Agent | When invoked | Tools available |
 |---|---|---|
-| **Supervisor** | First — every turn | None directly. Outputs a `RouteDecision(specialist, rationale)` via structured output. May reroute after a specialist replies. |
+| **Supervisor** | First - every turn | None directly. Outputs a `RouteDecision(specialist, rationale)` via structured output. May reroute after a specialist replies. |
 | **Transaction Analyst** | Specific transactional questions ("food spend last week") | `get_transactions`, `search_transactions_semantic`, `get_recurring_transactions`, `compare_periods`, `analyze_category_drift` |
 | **Knowledge Advisor** | Pure conceptual / educational queries | `search_financial_knowledge` |
 | **Budget Coach** | Goal-setting, "am I on track", saving advice | `get_spending_summary`, `get_budgets`, `evaluate_budget_status`, `propose_budget`, `forecast_spending`, `search_financial_knowledge` |
@@ -164,7 +164,7 @@ Auto-detect recurring charges. Returns an array of `{merchant, category, typical
 
 #### `find_unusual_transactions(period="last_30_days", z_threshold=2.5)`
 Per-category z-score over the last 90 days. Returns transactions whose absolute amount is `z_threshold` standard deviations from the category's mean.
-- Surfaces real outliers ("you usually spend $25–$60 at restaurants — this $230 charge stands out").
+- Surfaces real outliers ("you usually spend $25–$60 at restaurants - this $230 charge stands out").
 
 ### 3.2 Insights tools
 
@@ -204,7 +204,7 @@ Suggests a budget based on the user's actual spend pattern, targeting a savings 
 ### 3.5 Tool execution rules
 
 - **All tools cached** in Redis, key = `(tool_name, sorted-args-hash, user_id)`, TTL = 5 min.
-- **All tools traced** via Langfuse — duration, args (PII-redacted), result size.
+- **All tools traced** via Langfuse - duration, args (PII-redacted), result size.
 - **All tools enforce `user_id` scope** at the SQL layer; agents cannot read across users.
 - **All tools return `{"_summary": ...}`** for the LLM to quote directly without re-derivation.
 
@@ -223,11 +223,11 @@ Suggests a budget based on the user's actual spend pattern, targeting a savings 
 - No baked-in stories (anomalies, recurring drift)
 
 That's enough to demo "list my transactions". It is not enough to demo:
-- *Anomaly detection* — needs real outliers to find
-- *Recurring detection* — needs ≥3 occurrences per pattern, so ≥6 months for monthly subs
-- *Forecasting* — needs trend
-- *Period comparisons* — needs ≥2 comparable periods
-- *"My spending changed because…"* — needs categories that actually shifted
+- *Anomaly detection* - needs real outliers to find
+- *Recurring detection* - needs ≥3 occurrences per pattern, so ≥6 months for monthly subs
+- *Forecasting* - needs trend
+- *Period comparisons* - needs ≥2 comparable periods
+- *"My spending changed because…"* - needs categories that actually shifted
 
 ### 4.2 Target dataset
 
@@ -256,7 +256,7 @@ class Conversation:   id, user_id, session_id, started_at, last_at, message_coun
 class TraceEvent:     id, request_id, agent, tool, args_hash, duration_ms, ts
 ```
 
-`Transaction.is_recurring` and `anomaly_score` are pre-computed at seed time — gives the agent fast lookups without recomputing on every query, while the *tools* still re-derive on demand for "live" queries.
+`Transaction.is_recurring` and `anomaly_score` are pre-computed at seed time - gives the agent fast lookups without recomputing on every query, while the *tools* still re-derive on demand for "live" queries.
 
 ### 4.4 Personas (the 5 demo users)
 
@@ -280,7 +280,7 @@ Each persona is a deliberate scenario the agent can reason about. Demos can swit
 | **Income raise** | Alex | Payroll deposits step up by 14% at month 5. |
 | **Annual insurance** | Sam | Single $1,250 annual auto-insurance hit in month 2. |
 | **Gradual dining drift** | Alex | Dining moves from $350/mo to $560/mo over 4 months. Should surface in `analyze_category_drift`. |
-| **Overdraft event** | Casey | One day with negative checking balance — visible in account history. |
+| **Overdraft event** | Casey | One day with negative checking balance - visible in account history. |
 | **Tax refund** | Jordan | $1,400 deposit in March. Income spike. |
 
 ### 4.6 Generation approach
@@ -300,7 +300,7 @@ Pure dense retrieval misses queries that hinge on rare terms (specific framework
 ```
 query
   │
-  ├─► (optional) HyDE rewrite — generate a hypothetical answer, embed that
+  ├─► (optional) HyDE rewrite - generate a hypothetical answer, embed that
   │
   ├─► dense retrieval     (Chroma cosine, k=20)  ──┐
   │                                                ├─► RRF fusion ──► top 12
@@ -314,7 +314,7 @@ query
 
 - **Dense:** ChromaDB, `text-embedding-3-small`. Persistent on disk.
 - **Sparse:** `rank_bm25` in-process; rebuilt at ingest time, fits in RAM (small corpus).
-- **Fusion:** Reciprocal Rank Fusion (RRF, k=60) — parameterless and robust.
+- **Fusion:** Reciprocal Rank Fusion (RRF, k=60) - parameterless and robust.
 - **Reranker:** `cross-encoder/ms-marco-MiniLM-L-6-v2` from sentence-transformers. ~80MB, runs on CPU, ~50ms for 12 pairs.
 - **HyDE:** off by default (extra LLM call); on for queries where dense+sparse top result has score below threshold.
 
@@ -342,7 +342,7 @@ After the agent drafts its answer, a small post-processor marks each numeric/fac
 
 - **Per-thread checkpointer** (AsyncSqliteSaver) keyed by `(user_id, session_id)`.
 - **Summary buffer compaction:** when message count > 40 *or* token estimate > 12k, a summarizer LLM call rewrites the oldest 30 messages into a single `SystemMessage("Earlier in this conversation: …")`.
-- **Cross-session "pinned facts":** structured per-user notes (e.g., "user prefers metric units", "user is debt-averse") inserted as a system message every turn — small, opt-in, manually curated for demo.
+- **Cross-session "pinned facts":** structured per-user notes (e.g., "user prefers metric units", "user is debt-averse") inserted as a system message every turn - small, opt-in, manually curated for demo.
 
 ---
 
@@ -351,11 +351,11 @@ After the agent drafts its answer, a small post-processor marks each numeric/fac
 Use FastAPI + `WebSocket` for `/api/chat/stream`. Stream events:
 
 ```
-event: token        — assistant token delta
-event: tool_call    — { name, args } when supervisor selects
-event: tool_result  — { name, summary } when tool returns
-event: route        — { specialist, rationale } when supervisor routes
-event: done         — { tool_calls, citations, message }
+event: token        - assistant token delta
+event: tool_call    - { name, args } when supervisor selects
+event: tool_result  - { name, summary } when tool returns
+event: route        - { specialist, rationale } when supervisor routes
+event: done         - { tool_calls, citations, message }
 ```
 
 Frontend's `ToolTrace` component renders these live so the user *sees* the agent thinking.
@@ -366,7 +366,7 @@ REST `/api/chat` remains for non-streaming integrations (n8n).
 
 ## 8. Observability
 
-### 8.1 Tracing — Langfuse (self-hosted via docker-compose)
+### 8.1 Tracing - Langfuse (self-hosted via docker-compose)
 
 Every request gets a trace with nested spans:
 
@@ -387,7 +387,7 @@ trace: chat
 
 Trace IDs propagate via `X-Request-Id` header through n8n into the backend.
 
-### 8.2 Metrics — Prometheus + `prometheus-fastapi-instrumentator`
+### 8.2 Metrics - Prometheus + `prometheus-fastapi-instrumentator`
 
 - `chat_requests_total{status}`
 - `chat_duration_seconds_bucket`
@@ -400,7 +400,7 @@ Trace IDs propagate via `X-Request-Id` header through n8n into the backend.
 
 Scraped at `/metrics`.
 
-### 8.3 Logs — structlog JSON
+### 8.3 Logs - structlog JSON
 
 Every log line carries `request_id`, `user_id`, `session_id`. Pretty-rendered locally (`LOG_FORMAT=console`), JSON in production. PII (email, raw amounts above $1000) redacted at the formatter level.
 
@@ -431,7 +431,7 @@ Mock JWT (`user_id` in `sub`) for the demo. Production-ready hooks: `get_current
 
 ### 9.4 Tool sandboxing
 
-`ToolNode` wraps every tool with `(timeout=15s, exception_handler=err→llm)`. A failing tool returns a structured error to the LLM rather than crashing the graph — the LLM is instructed to retry with corrected args once before falling back.
+`ToolNode` wraps every tool with `(timeout=15s, exception_handler=err→llm)`. A failing tool returns a structured error to the LLM rather than crashing the graph - the LLM is instructed to retry with corrected args once before falling back.
 
 ---
 
@@ -439,7 +439,7 @@ Mock JWT (`user_id` in `sub`) for the demo. Production-ready hooks: `get_current
 
 ### 10.1 Golden set
 
-`tests/eval/golden.jsonl` — 40+ queries, each with:
+`tests/eval/golden.jsonl` - 40+ queries, each with:
 
 ```json
 {"query": "How much did I spend on food last week?",
@@ -458,7 +458,7 @@ Mock JWT (`user_id` in `sub`) for the demo. Production-ready hooks: `get_current
 - Final answer contains required facts (validated by an LLM-as-judge call with a strict rubric).
 - No forbidden phrases.
 
-Scores reported as `{routing_accuracy, tool_coverage, factual_grounding, safety}` — a 4-axis vector you can show in the demo.
+Scores reported as `{routing_accuracy, tool_coverage, factual_grounding, safety}` - a 4-axis vector you can show in the demo.
 
 ---
 
@@ -466,19 +466,19 @@ Scores reported as `{routing_accuracy, tool_coverage, factual_grounding, safety}
 
 ```
 GET  /health
-GET  /metrics                            — Prometheus
+GET  /metrics                            - Prometheus
 
-POST /api/auth/login                      — mock JWT
+POST /api/auth/login                      - mock JWT
 GET  /api/auth/me
 
-GET  /api/users                           — list personas (for the demo persona switcher)
-GET  /api/accounts                        — user's accounts
+GET  /api/users                           - list personas (for the demo persona switcher)
+GET  /api/accounts                        - user's accounts
 
-GET  /api/transactions                    — filtered list
+GET  /api/transactions                    - filtered list
 GET  /api/transactions/{id}
-GET  /api/transactions/recurring          — auto-detected
-GET  /api/transactions/anomalies          — outliers
-POST /api/transactions/search             — semantic search
+GET  /api/transactions/recurring          - auto-detected
+GET  /api/transactions/anomalies          - outliers
+POST /api/transactions/search             - semantic search
 
 GET  /api/insights/summary?period=…
 GET  /api/insights/trend?period=…
@@ -487,15 +487,15 @@ GET  /api/insights/forecast?period=…
 GET  /api/insights/category-drift?window=…
 
 GET  /api/budgets
-PUT  /api/budgets/{category}              — update target
-POST /api/budgets/propose                 — generate proposal
+PUT  /api/budgets/{category}              - update target
+POST /api/budgets/propose                 - generate proposal
 
-POST /api/chat                            — REST, single-shot
-WS   /api/chat/stream                     — streaming events
+POST /api/chat                            - REST, single-shot
+WS   /api/chat/stream                     - streaming events
 GET  /api/chat/history?session_id=…
 
-GET  /api/admin/cost                      — token + $ rollup
-GET  /api/admin/eval                      — last eval run results
+GET  /api/admin/cost                      - token + $ rollup
+GET  /api/admin/eval                      - last eval run results
 ```
 
 ---
@@ -518,10 +518,10 @@ GET  /api/admin/eval                      — last eval run results
 
 ## 13. Open questions (need user input)
 
-1. **OpenAI key budget** — Langfuse self-host, hybrid RAG, and 5-persona seeds will burn ~5–10k tokens of embeddings + ~50–150 chat-test calls. Are we OK with ~$2–5 of OpenAI spend during dev?
-2. **Self-hosting Langfuse vs LangSmith** — Langfuse runs locally in Docker (free, more setup); LangSmith is hosted (free tier, less setup). Recommend Langfuse for the "no external dependency" story but it adds 2 containers. OK?
-3. **Cross-encoder reranker** — adds ~80MB of model weights and ~50ms per RAG call. Worth it for the demo polish? (I think yes.)
-4. **Multi-agent vs single agent** — committing to multi-agent makes Day 2 tighter. Want me to keep multi-agent as the headline goal, or play it safe with a single agent + 13 tools?
-5. **Streaming WebSocket** — adds frontend complexity. Skip and keep REST? (Recommend keeping — visible win in demo.)
+1. **OpenAI key budget** - Langfuse self-host, hybrid RAG, and 5-persona seeds will burn ~5–10k tokens of embeddings + ~50–150 chat-test calls. Are we OK with ~$2–5 of OpenAI spend during dev?
+2. **Self-hosting Langfuse vs LangSmith** - Langfuse runs locally in Docker (free, more setup); LangSmith is hosted (free tier, less setup). Recommend Langfuse for the "no external dependency" story but it adds 2 containers. OK?
+3. **Cross-encoder reranker** - adds ~80MB of model weights and ~50ms per RAG call. Worth it for the demo polish? (I think yes.)
+4. **Multi-agent vs single agent** - committing to multi-agent makes Day 2 tighter. Want me to keep multi-agent as the headline goal, or play it safe with a single agent + 13 tools?
+5. **Streaming WebSocket** - adds frontend complexity. Skip and keep REST? (Recommend keeping - visible win in demo.)
 
 Defaults if you don't answer: yes / Langfuse / yes / multi-agent with single-agent fallback / keep streaming.

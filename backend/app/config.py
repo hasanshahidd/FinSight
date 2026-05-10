@@ -16,7 +16,7 @@ class Settings(BaseSettings):
 
     env: str = "dev"
 
-    # LLM — accept both LLM_MODEL and OPENAI_MODEL env names
+    # LLM - accept both LLM_MODEL and OPENAI_MODEL env names
     llm_provider: str = "openai"
     llm_model: str = Field(
         default="gpt-4o-mini",
@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379/0"
     cache_ttl_seconds: int = 300
 
-    # Auth — accept both JWT_EXPIRE_MINUTES and JWT_EXPIRES_IN env names
+    # Auth - accept both JWT_EXPIRE_MINUTES and JWT_EXPIRES_IN env names
     jwt_secret: str = "change-me"
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = Field(
@@ -52,7 +52,7 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     log_format: str = "json"
 
-    # CORS — frontend dev server + n8n
+    # CORS - frontend dev server + n8n
     cors_origins: list[str] = Field(
         default_factory=lambda: [
             "http://localhost:5173",

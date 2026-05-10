@@ -61,21 +61,21 @@ export function DashboardPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Stat
             label="Total spent"
-            value={summary ? formatMoney(summary.total_spent) : "—"}
+            value={summary ? formatMoney(summary.total_spent) : "-"}
             icon={<Wallet2 className="h-4 w-4" />}
             delta={trend?.pct_change_vs_previous}
             loading={loading}
           />
           <Stat
             label="Total income"
-            value={summary ? formatMoney(summary.total_income) : "—"}
+            value={summary ? formatMoney(summary.total_income) : "-"}
             icon={<TrendingUp className="h-4 w-4" />}
             tone="positive"
             loading={loading}
           />
           <Stat
             label="Net"
-            value={summary ? formatMoney(summary.net) : "—"}
+            value={summary ? formatMoney(summary.net) : "-"}
             icon={<TrendingUp className="h-4 w-4" />}
             tone={summary && summary.net >= 0 ? "positive" : "negative"}
             loading={loading}

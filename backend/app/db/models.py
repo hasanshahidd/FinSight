@@ -1,4 +1,4 @@
-"""SQLAlchemy ORM models — multi-account, multi-user mock banking schema."""
+"""SQLAlchemy ORM models - multi-account, multi-user mock banking schema."""
 
 from datetime import datetime
 from typing import Literal

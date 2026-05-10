@@ -60,7 +60,7 @@ SCENARIOS = {
         ],
     },
     "D_anomaly": {
-        "user_id": "user_2",  # Sam — has the medical-bill story
+        "user_id": "user_2",  # Sam - has the medical-bill story
         "expected_route": "anomaly_detective",
         "queries": [
             "Is anything weird in my recent spending?",

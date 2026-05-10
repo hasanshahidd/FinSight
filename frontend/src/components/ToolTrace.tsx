@@ -39,7 +39,7 @@ function readableResult(raw: string | undefined): string {
       return previews.join(" · ");
     }
   } catch {
-    /* JSON likely truncated mid-string — fall through to regex */
+    /* JSON likely truncated mid-string - fall through to regex */
   }
   // Regex fallback: extract _summary even from truncated JSON. Handles
   // backslash-escaped quotes and stops at the first unescaped quote.

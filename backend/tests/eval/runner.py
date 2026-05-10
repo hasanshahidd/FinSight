@@ -63,7 +63,7 @@ async def _run_one(case: dict) -> dict:
     # Routing accuracy
     expected_route = case.get("expected_route")
     if expected_route is None:
-        routing_ok = 1.0  # no expectation — pass
+        routing_ok = 1.0  # no expectation - pass
     else:
         routing_ok = 1.0 if actual_route == expected_route else 0.0
 

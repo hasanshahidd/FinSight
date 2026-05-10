@@ -1,4 +1,4 @@
-"""KnowledgeAdvisor — ReAct subgraph."""
+"""KnowledgeAdvisor - ReAct subgraph."""
 
 from langchain_core.language_models import BaseChatModel
 

@@ -24,7 +24,7 @@ export function usePersona() {
         if (!alive) return;
         setUsers(all);
       } catch {
-        /* backend may not be up — UI degrades to default */
+        /* backend may not be up - UI degrades to default */
       } finally {
         if (alive) setLoading(false);
       }

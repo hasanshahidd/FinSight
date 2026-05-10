@@ -1,4 +1,4 @@
-"""Chat REST endpoint — invokes the multi-agent supergraph."""
+"""Chat REST endpoint - invokes the multi-agent supergraph."""
 
 import json
 import time
