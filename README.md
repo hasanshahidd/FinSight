@@ -18,6 +18,44 @@ After ~2 minutes (build + seed + ingest), open:
 - **Backend API** → http://localhost:8000/docs
 - **Optional Langfuse traces** → `docker compose --profile observability up -d` then http://localhost:3000
 
+## 🗄️ How the databases are created on first run
+
+Both **SQLite** (mock bank) and **ChromaDB** (knowledge index) are created **automatically** the first time the backend starts — no manual seeding step. The Docker entrypoint runs three commands in sequence:
+
+```dockerfile
+# backend/Dockerfile
+CMD python scripts/generate_demo_data.py \
+ && python scripts/ingest_docs.py \
+ && uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+
+| Step | What it creates | Where it lands |
+|------|-----------------|----------------|
+| 1. `generate_demo_data.py` | Calls `init_db()` to create the SQLAlchemy tables, then `seed_all()` to insert **5 personas × 240 days × ~2,400 deterministic transactions** with 8 baked-in stories | `backend/data/finsight.db` (SQLite) |
+| 2. `ingest_docs.py` | Reads 21 markdown docs from `data/knowledge/`, embeds them via OpenAI, and persists both the dense Chroma collection and the BM25 corpus | `backend/chroma_db/` (vector store) |
+| 3. `uvicorn` | FastAPI starts; the `lifespan` hook re-runs `init_db()` (idempotent — only creates tables if missing) | API on port 8000 |
+
+**Both seed steps are idempotent.** `seed_persona()` deletes existing rows for each user before inserting, and `get_chroma_collection(reset=True)` drops the collection before re-ingesting. So whether it's the first run or the hundredth, the resulting state is identical — reproducibility on every `docker compose up`.
+
+The Docker volumes (`backend_data`, `backend_chroma`) persist between restarts, so subsequent boots are fast (~5 s) but still get a clean re-seed if you want.
+
+### Local (no Docker) — run the seeds once manually
+
+If you skip Docker and run uvicorn directly, seed the database + index once before starting the server:
+
+```bash
+cd backend
+.\.venv\Scripts\Activate.ps1            # PowerShell on Windows
+pip install -r requirements.txt
+
+python scripts/generate_demo_data.py    # creates finsight.db + 5 personas
+python scripts/ingest_docs.py           # creates chroma_db/ + 21 docs
+
+uvicorn app.main:app --reload --port 8000
+```
+
+The FastAPI startup hook still calls `init_db()` automatically, so the **table schema** auto-creates on first uvicorn boot — but without step 1 the database is empty and chat queries against user data return nothing. Both `finsight.db` and `chroma_db/` are listed in `.gitignore` because they're rebuilt from the seed scripts, not committed.
+
 ## ☁️ Free-tier deployment
 
 A complete guide to hosting the full stack for $0 — Oracle Cloud (forever-free VPS), Render, Fly.io, Hugging Face Spaces, or Cloud Run for the backend; Vercel / Cloudflare Pages / Netlify for the frontend; Upstash for managed Redis.
